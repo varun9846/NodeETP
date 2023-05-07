@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Armstrong Numbers</title>
+</head>
+<body>
+  <h1>Armstrong Numbers</h1>
+  <form>
+    <label for="number">Enter a number:</label>
+    <input type="text" id="number" name="number">
+    <button type="button" onclick="getArmstrongNumbers()">Generate</button>
+  </form>
+  <ul id="output"></ul>
+  <script>
+    function getArmstrongNumbers() {
+      const number = document.getElementById('number').value;
+      fetch(`/armstrong?n=${number}`)
+        .then(response => response.json())
+        .then(data => {
+          const output = document.getElementById('output');
+          output.innerHTML = '';
+          data.forEach(number => {
+            const li = document.createElement('li');
+            li.textContent = number;
+            output.appendChild(li);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+  </script>
+</body>
+</html>

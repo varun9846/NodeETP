@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Temperature Converter</title>
+</head>
+<body>
+  <h1>Temperature Converter</h1>
+  <form id="converter">
+    <label for="temp">Temperature:</label>
+    <input type="number" id="temp" name="temp" required>
+    <select id="unit" name="unit" required>
+      <option value="C">Celsius</option>
+      <option value="F">Fahrenheit</option>
+    </select>
+    <button type="submit">Convert</button>
+  </form>
+  <div id="result"></div>
+  <script>
+    const form = document.getElementById('converter');
+    const result = document.getElementById('result');
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const temp = form.elements.temp.value;
+      const unit = form.elements.unit.value;
+      fetch('/convert', {
+        method: 'POST',
+        body: new URLSearchParams({temp, unit})
+      })
+      .then(response => response.text())
+      .then(text => {
+        result.textContent = `Result: ${text}`;
+      })
+      .catch(error => {
+        result.textContent = `Error: ${error.message}`;
+      });
+    });
+  </script>
+</body>
+</html>
+<!-- Q8b create a node js web server application with the http module for conversion
+ between celcius and fahrenheit.accept temperature values from the input text fields of
+  client page and provide the output values as a response with click event on a button -->

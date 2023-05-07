@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Factorial Numbers</title>
+</head>
+<body>
+  <h1>Factorial Numbers</h1>
+  <form>
+    <label for="num">Number:</label>
+    <input type="text" id="num" name="num">
+    <button type="button" onclick="getFactorials()">Calculate</button>
+  </form>
+  <div id="output"></div>
+  <script>
+    function getFactorials() {
+      const num = document.getElementById('num').value;
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            const factorials = JSON.parse(xhr.responseText);
+            const output = document.getElementById('output');
+            output.innerHTML = '';
+            for (let i = 0; i < factorials.length; i++) {
+              const p = document.createElement('p');
+              p.textContent = `${i + 1}! = ${factorials[i]}`;
+              output.appendChild(p);
+            }
+          } else {
+            alert('Error: ' + xhr.statusText);
+          }
+        }
+      };
+      xhr.open('GET', `/factorial?num=${num}`);
+      xhr.send();
+    }
+  </script>
+</body>
+</html>

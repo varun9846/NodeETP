@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arithmetic Calculator</title>
+</head>
+<body>
+  <h1>Arithmetic Calculator</h1>
+  <form>
+    <p>
+      Number: <input type="text" id="number">
+    </p>
+    <p>
+      <button type="button" onclick="calculate()">Calculate</button>
+    </p>
+  </form>
+  <div id="results"></div>
+  <script>
+    function calculate() {
+      const number = parseInt(document.getElementById('number').value);
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/calculate');
+      xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+      xhr.onload = function() {
+        const result = JSON.parse(xhr.responseText);
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = `
+          <p>Increment: ${result.increment}</p>
+          <p>Decrement: ${result.decrement}</p>
+          <p>Square: ${result.square}</p>
+
+        `;
+      };
+      xhr.send(JSON.stringify({ number }));
+    }
+  </script>
+</body>
+</html>

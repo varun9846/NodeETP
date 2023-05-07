@@ -1,0 +1,7 @@
+the server is successfully created 
+details are 
+name varun sharma
+registration 12019846
+
+
+create a node.js web server application with the http module to perform the search operation on a given set of values . Accept a series of values from the input text fields of the client page and provide the output values as response with click event on button

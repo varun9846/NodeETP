@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Even Numbers</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    socket.on('evenNumber', (number) => {
+      const p = document.createElement('p');
+      p.textContent = `Even number: ${number}`;
+      document.body.appendChild(p);
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Client Page</title>
+  </head>
+  <body>
+    <h1>Welcome to the Client Page</h1>
+    <p>My student details are:</p>
+    <ul>
+      <li>Name: [Your Name]</li>
+      <li>Roll Number: [Your Roll Number]</li>
+      <li>Department: [Your Department]</li>
+    </ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      // Listen for the oddVisitorCount event from the server and update the client-side HTML
+      socket.on('oddVisitorCount', (count) => {
+        const p = document.createElement('p');
+        p.innerHTML = `The visitor count is currently ${count}, which is odd.`;
+        document.body.appendChild(p);
+      });
+    </script>
+  </body>
+</html>
